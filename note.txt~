@@ -1,0 +1,42 @@
+L'application a était poussé jusqu'au debut d TP6, jusqu'à l'authentification.
+Pour developper cette application nous avons utilisé la VM Vagrant, utilisé dans les TP précédants.
+
+Une fois vagrant lancé,
+Voici les étapes : 
+$ php composer.phar install
+Ajouter les tables USERS et STATUSES dans la base de données uframework avec la commande suivante :
+vagrant@vm $ mysql uframework -uuframework -ppassw0rd < app/config/schema.sql
+Grace au localhost:8082 on accéde à l'appli.
+
+Voici les différentes routes de l'application :
+
+LES GET :
+	/ : redirection sur /statuses.
+	/﻿statusNotFound : redirection sur une page d'erreur.
+	/statuses : liste tous les status.
+
+	Sur /statuses on peut passer d'autres arguments :
+	/statuses?orderBy=status_message : trie les tweets.
+	/statuses?limit=0$10 : Limite l'affichage du nombre de tweets (Ici les tweets 0 à 10).
+	/statuses?user=5 : Liste des tweets spécifique à un utilisateur (Ici l'utilisateur d'id 5).
+	/statuses/1 : retourne le tweet d'id 1
+
+	/register : redirection sur la page d'enregistrement
+	/login : redirection sur la page de connection
+	/logout : Déconnexion (session_destroy)
+
+Les POST :
+
+	/statuses : Post un tweet
+	/register : Post des données pour l'enregistrement d'un utilisateur.
+	/login : Post des données pour la connexion d'un utilisateur.
+
+Le DELETE :
+
+	/statuses/1 : supprime le status d'id 1
+
+Note :
+J'ai eu un problème d'installation pour vagrant sur mon ordi perso, je me suis donc debrouillé pour faire quelques tests à partir d'exemple déjà vu, cependant vu que l'on a pas assez avancé , je n'ai pas pu faire les tests avec Goutte , Behat et Minsk
+Ajout de la library password_compat dans composer.json afin de bénéficier des fonctions password_* de PHP5.5
+car la méthode password_hash n'était pas reconnue en PHP4.4.
+La partie graphique de l'application a été réalisé avec bootstrap.
